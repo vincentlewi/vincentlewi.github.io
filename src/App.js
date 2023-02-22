@@ -7,7 +7,8 @@ import * as THREE from 'three'
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { PerspectiveCamera } from "three";
-import Pc from './components/Pcpc'
+import Pc from './components/Pc'
+import Paper from './components/Paper'
 import CameraControls from 'camera-controls'
 
 CameraControls.install({ THREE })
@@ -18,7 +19,7 @@ function Controls({ zoom, focus, pos = new THREE.Vector3(), look = new THREE.Vec
   const gl = useThree((state) => state.gl)
   const controls = useMemo(() => new CameraControls(camera, gl.domElement), [])
   return useFrame((state, delta) => {
-    zoom ? pos.set(focus.x, focus.y, focus.z + 0.2) : pos.set(0, 0, 5)
+    zoom ? pos.set(focus.x, focus.y, focus.z + 0.2) : pos.set(0, 2.5, 4 )
     zoom ? look.set(focus.x, focus.y, focus.z - 0.2) : look.set(0, 0, 0)
 
     state.camera.position.lerp(pos, 0.5)
@@ -46,19 +47,32 @@ export default function App() {
     </group>
   }
   
-  const [zoom, setZoom] = useState(false)
-  const [focus, setFocus] = useState({})
+  useEffect(() => {
+    function handleEscapeKey(event: KeyboardEvent) {
+      if (event.code === 'Escape') {
+        setZoom(false)
+        setFocus({})
+      }
+    }
+  
+    document.addEventListener('keydown', handleEscapeKey)
+    return () => document.removeEventListener('keydown', handleEscapeKey)
+  }, [])
+
+  const [zoom, setZoom] = useState(true)
+  const [focus, setFocus] = useState({x: -0.19, y: 0.7, z: 0.7})
   const momentsArray = useMemo(() => Array.from({ length: 500 }, () => ({ color: 'red', position: [randomPos(), randomPos(), randomPos()] })), [])
   return (
     <div className='App'>
       <Canvas
-        camera={{position: [0, .8, 1.5]}}
+        camera={{position: [-0.19, 0.7, 0.7]}}
       >
         <OrbitControls enableZoom={false}/> 
         <pointLight position={[10, 10, 10]} />
         <ambientLight intensity={0.5} />
         <Suspense fallback={null}>
           <Pc zoomToView={(focusRef) => (setZoom(!zoom), setFocus(focusRef))}/>
+          <Paper zoomToView={(focusRef) => (setZoom(!zoom), setFocus(focusRef))}/>
         </Suspense>
         <CameraHelper />
         <Cloud momentsData={momentsArray} zoomToView={(focusRef) => (setZoom(!zoom), setFocus(focusRef))} />
