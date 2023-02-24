@@ -6,13 +6,11 @@ import Desk from './Desk'
 import * as THREE from 'three'
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import { PerspectiveCamera } from "three";
 import Pc from './components/Pc'
-import Paper from './components/Paper'
 import CameraControls from 'camera-controls'
 
 CameraControls.install({ THREE })
-const randomPos = (min = 5, max = -5) => Math.random() * (max - min) + min
+const randomPos = (min = 10, max = -10) => Math.random() * (max - min) + min
 
 function Controls({ zoom, focus, pos = new THREE.Vector3(), look = new THREE.Vector3() }) {
   const camera = useThree((state) => state.camera)
@@ -33,20 +31,13 @@ function Controls({ zoom, focus, pos = new THREE.Vector3(), look = new THREE.Vec
 function Cloud({ momentsData, zoomToView }) {
   return momentsData.map(({ position, color }, i) => (
     <mesh key={i} position={position} onClick={(e) => zoomToView(e.object.position)}>
-      <boxGeometry args={[0.1, 0.08, 0.003]} />
+      <boxGeometry args={[0.02, 0.02, 0.02]} />
       <meshStandardMaterial color={color} />
     </mesh>
   ))
 }
 
 export default function App() {
-  function CameraHelper() {
-    const camera = new PerspectiveCamera(60, 1.77, 0.1, 2000)
-    return <group position={[0, .8, 1.5]}>
-      <cameraHelper args={[camera]} />
-    </group>
-  }
-  
   useEffect(() => {
     function handleEscapeKey(event: KeyboardEvent) {
       if (event.code === 'Escape') {
@@ -60,21 +51,20 @@ export default function App() {
   }, [])
 
   const [zoom, setZoom] = useState(true)
-  const [focus, setFocus] = useState({x: -0.19, y: 0.7, z: 0.7})
-  const momentsArray = useMemo(() => Array.from({ length: 500 }, () => ({ color: 'red', position: [randomPos(), randomPos(), randomPos()] })), [])
+  const [focus, setFocus] = useState({x: -0.19, y: 0.9, z: 0.7})
+  const momentsArray = useMemo(() => Array.from({ length: 3000 }, () => ({ color: 'brown', position: [randomPos(), randomPos(), randomPos()] })), [])
   return (
     <div className='App'>
       <Canvas
-        camera={{position: [-0.19, 0.7, 0.7]}}
+        camera={{position: [-0.19, 0.9, 0.7]}}
       >
         <OrbitControls enableZoom={false}/> 
         <pointLight position={[10, 10, 10]} />
         <ambientLight intensity={0.5} />
         <Suspense fallback={null}>
           <Pc zoomToView={(focusRef) => (setZoom(!zoom), setFocus(focusRef))}/>
-          <Paper zoomToView={(focusRef) => (setZoom(!zoom), setFocus(focusRef))}/>
+          {/* <Paper zoomToView={(focusRef) => (setZoom(!zoom), setFocus(focusRef))}/> */}
         </Suspense>
-        <CameraHelper />
         <Cloud momentsData={momentsArray} zoomToView={(focusRef) => (setZoom(!zoom), setFocus(focusRef))} />
         <Controls zoom={zoom} focus={focus} />
       </Canvas>
