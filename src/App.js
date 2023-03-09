@@ -17,8 +17,8 @@ function Controls({ zoom, focus, pos = new THREE.Vector3(), look = new THREE.Vec
   const gl = useThree((state) => state.gl)
   const controls = useMemo(() => new CameraControls(camera, gl.domElement), [])
   return useFrame((state, delta) => {
-    zoom ? pos.set(focus.x, focus.y, focus.z + 0.2) : pos.set(0, 2.5, 4 )
-    zoom ? look.set(focus.x, focus.y, focus.z - 0.2) : look.set(0, 0, 0)
+    zoom ? pos.set(focus.x, focus.y, focus.z + 0.2) : pos.set(0, 2.5, 4)
+    zoom ? look.set(focus.x, focus.y, focus.z - 3.5) : look.set(0, 0, 0)
 
     state.camera.position.lerp(pos, 0.5)
     state.camera.updateProjectionMatrix()
@@ -51,8 +51,8 @@ export default function App() {
   }, [])
 
   const [zoom, setZoom] = useState(true)
-  const [focus, setFocus] = useState({x: -0.19, y: 0.9, z: 0.7})
-  const momentsArray = useMemo(() => Array.from({ length: 3000 }, () => ({ color: 'brown', position: [randomPos(), randomPos(), randomPos()] })), [])
+  const [focus, setFocus] = useState({x: -0.34, y: 0.9, z: 0.7})
+  const momentsArray = useMemo(() => Array.from({ length: 3000 }, () => ({ color: '#bda799', position: [randomPos(), randomPos(), randomPos()] })), [])
   return (
     <div className='App'>
       <Canvas
@@ -62,39 +62,12 @@ export default function App() {
         <pointLight position={[10, 10, 10]} />
         <ambientLight intensity={0.5} />
         <Suspense fallback={null}>
-          <Pc zoomToView={(focusRef) => (setZoom(!zoom), setFocus(focusRef))}/>
+          <Pc zoomToView={(focusRef) => (setZoom(!zoom), setFocus(focusRef))} zoom={zoom}/>
           {/* <Paper zoomToView={(focusRef) => (setZoom(!zoom), setFocus(focusRef))}/> */}
         </Suspense>
         <Cloud momentsData={momentsArray} zoomToView={(focusRef) => (setZoom(!zoom), setFocus(focusRef))} />
         <Controls zoom={zoom} focus={focus} />
       </Canvas>
-    {/* <div className='room'>
-    </div>
-      <div className='content'>
-          <div className='screen head'>
-            <p>{test}</p>
-            <p>Hey there, Vincent here</p>
-          </div>
-          <div className='screen uh'>
-            <p>Uh yeah my PC is still rendering the model</p>
-          </div>
-          <div className='lastScreen'>
-            <div className='glass uh'>
-              <p>Anyway, here's the usual 'about me'</p>
-              <p className='aboutme'>I'm Vincent, a sophomore student in Singapore Management University studying Information Systems and Data Science & Analytics.</p>
-            </div>
-          </div>
-          <div className='footer'>
-            <div className='socialMedia'>
-            <p>Hit me up!</p>
-              <a href='https://github.com/vincentlewi'><img src={require('./socialMedia/github.png')}/></a>
-              <a href='https://sg.linkedin.com/in/lewivincent'><img src={require('./socialMedia/linkedin.png')}/></a>
-              <a href='https://instagram.com/vincentlewi/'><img src={require('./socialMedia/instagram.png')}/></a>
-              <a href='mailto:vincentlewii@gmail.com'><img src={require('./socialMedia/email.png')}/></a>
-            </div>
-          </div>
-      </div>
-      <Desk /> */}
     </div>
   )
 }
