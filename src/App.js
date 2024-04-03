@@ -1,8 +1,6 @@
 import React, { Suspense, useState, useEffect, useMemo } from 'react'
 import './App.css'
-import Goo from './Goo.tsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Desk from './Desk'
 import * as THREE from 'three'
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
@@ -39,7 +37,7 @@ function Cloud({ momentsData, zoomToView }) {
 
 export default function App() {
   useEffect(() => {
-    function handleEscapeKey(event: KeyboardEvent) {
+    function handleEscapeKey(event) {
       if (event.code === 'Escape') {
         setZoom(false)
         setFocus({})
@@ -51,8 +49,8 @@ export default function App() {
   }, [])
 
   const [zoom, setZoom] = useState(true)
-  const [focus, setFocus] = useState({x: -0.34, y: 0.9, z: 0.7})
-  const momentsArray = useMemo(() => Array.from({ length: 3000 }, () => ({ color: '#bda799', position: [randomPos(), randomPos(), randomPos()] })), [])
+  const [focus, setFocus] = useState({x: -0.42, y: 0.9, z: 0.7})
+  const momentsArray = useMemo(() => Array.from({ length: 2500 }, () => ({ color: '#bda799', position: [randomPos(), randomPos(), randomPos()] })), [])
   return (
     <div className='App'>
       <Canvas
@@ -60,7 +58,7 @@ export default function App() {
       >
         <OrbitControls enableZoom={false}/> 
         <pointLight position={[10, 10, 10]} />
-        <ambientLight intensity={0.5} />
+        <ambientLight intensity={0.4} />
         <Suspense fallback={null}>
           <Pc zoomToView={(focusRef) => (setZoom(!zoom), setFocus(focusRef))} zoom={zoom}/>
           {/* <Paper zoomToView={(focusRef) => (setZoom(!zoom), setFocus(focusRef))}/> */}
