@@ -7,3 +7,19 @@
 link {
   cursor: pointer;
 }
+
+.overlay {
+  position: fixed;
+  font-size: 1.5rem;
+  padding: 1rem;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it's above all other content */
+}

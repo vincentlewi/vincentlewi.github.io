@@ -51,8 +51,44 @@ export default function App() {
   const [zoom, setZoom] = useState(true)
   const [focus, setFocus] = useState({x: -0.42, y: 0.9, z: 0.7})
   const momentsArray = useMemo(() => Array.from({ length: 2500 }, () => ({ color: '#bda799', position: [randomPos(), randomPos(), randomPos()] })), [])
+  // const orientation = window.screen.orientation || window.screen.mozOrientation || window.screen.msOrientation
+  const [orientation, setOrientation] = useState(window.screen.orientation || window.screen.mozOrientation || window.screen.msOrientation)
+  const getOrientation = () =>
+    window.screen.orientation.type
+  const useScreenOrientation = () => {
+    const [orientation, setOrientation] =
+      useState(getOrientation())
+  
+    const updateOrientation = event => {
+      setOrientation(getOrientation())
+    }
+  
+    useEffect(() => {
+      window.addEventListener(
+        'orientationchange',
+        updateOrientation
+      )
+      return () => {
+        window.removeEventListener(
+          'orientationchange',
+          updateOrientation
+        )
+      }
+    }, [])
+  
+    return orientation
+  }
+
+  console.log(useScreenOrientation())
   return (
     <div className='App'>
+      {
+        useScreenOrientation() === 'portrait-primary' && (
+          <div className='overlay'>
+            <p>Please use a <b>desktop</b> or rotate your device to <b>landscape mode</b> for the best experience!</p>
+          </div>
+        )
+      }
       <Canvas
         camera={{position: [-0.19, 0.9, 0.7]}}
       >
