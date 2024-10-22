@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import AdiMape from './components/AdiMape';
+import MarkdownComponent from './components/ra/MarkdownComponent';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -16,6 +17,10 @@ const router = createHashRouter([
   {
     path: "/adi/mape",
     element: <AdiMape />
+  },
+  {
+    path: "/ra/updates_24_10_22",
+    element: <MarkdownComponent filePath='/ra/updates_24_10_22/updates_24_10_22.md'/>
   }
 ]);
 

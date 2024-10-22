@@ -23,3 +23,84 @@ link {
   align-items: center;
   z-index: 1000; /* Ensure it's above all other content */
 }
+
+.medium-markdown {
+  /* font-family: 'Merriweather', serif; */
+  line-height: 1.8;
+  color: #333;
+  padding: 20px;
+  max-width:1000px;
+  margin: auto;
+}
+
+.medium-markdown h1, .medium-markdown h2, .medium-markdown h3 {
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.medium-markdown h1 {
+  font-size: 2.5em;
+}
+
+.medium-markdown h2 {
+  font-size: 2em;
+  margin-top: 40px;
+}
+
+.medium-markdown h3 {
+  font-size: 1.5em;
+  margin-top: 30px;
+}
+
+.medium-markdown p {
+  font-size: 1.1em;
+  margin-bottom: 1.5em;
+}
+
+.medium-markdown blockquote {
+  border-left: 4px solid #ccc;
+  padding-left: 20px;
+  margin-left: 0;
+  color: #666;
+}
+
+.medium-markdown ul {
+  padding-left: 20px;
+  list-style: disc;
+}
+
+.medium-markdown code {
+  background-color: #f6f8fa;
+  padding: 2px 4px;
+  font-size: 0.9em;
+  border-radius: 4px;
+}
+
+.medium-markdown table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.medium-markdown td {
+  width: 1%; /* This makes all columns take equal width */
+  padding: 10px;
+}
+
+.medium-markdown table img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.medium-markdown img {
+  max-width: 100%;
+  max-height: 22rem;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
