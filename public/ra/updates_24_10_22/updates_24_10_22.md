@@ -10,7 +10,7 @@ The **W+ Adapter**, based on SD1.5, performs reasonably well when generating new
 
 |![trump_original](/ra/updates_24_10_22/trump.png)|![trump_old](/ra/updates_24_10_22/trump_old.png)|![trump_new](/ra/updates_24_10_22/trump_new.png)|
 |---|---|---|
-|Real-world Image|Original Method|Improved Method|
+| *Real-world Image* | *Original Method* | *Improved Method* |
 
 To understand why, we need to examine the editing method proposed by the authors.
 
@@ -26,11 +26,13 @@ When applying this technique to videos using a naive frame-by-frame approach, fu
 |---|---|---|
 | *Real-world Video* | *Original Method* | *Improved Method* |
 
-Since many video frames are visually similar, BLIP2 also produces identical text description, leading to many identical output frames. oreover, not all faces in each frame are detected by StyleGAN’s decoder, resulting in dropped frames when the W+ latent cannot be mapped from the corresponding image.
+Since many video frames are visually similar, BLIP2 also produces identical text description, leading to many identical output frames.
 
 | ![hoodie_original](/ra/updates_24_10_22/hoodie.gif) | ![hoodie_old](/ra/updates_24_10_22/hoodie_result_old.gif) | ![hoodie_new](/ra/updates_24_10_22/hoodie_result_avg.gif) |
 |---|---|---|
 | *Real-world Video* | *Original Method* | *Improved Method* |
+
+Moreover, not all faces in each frame are detected by StyleGAN’s decoder, resulting in dropped frames when the W+ latent cannot be mapped from the corresponding image.
 
 ### Improvements Made
 
@@ -78,3 +80,4 @@ As you can see, it works very well. We can confirm that editing facial expressio
 **Next Steps:**
 - Explore the use of textual inversion as an alternative to partial denoising.
 - Investigate how to extend this method to real-world video editing.
+- Isolate modifications only to facial areas in the image or video.
