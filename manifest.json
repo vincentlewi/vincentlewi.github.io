@@ -8,8 +8,8 @@
       "type": "image/x-icon"
     },
     {
-      "src": "muka.jpg",
-      "type": "image/jpg",
+      "src": "muka.png",
+      "type": "image/png",
       "sizes": "640x640"
     }
   ],

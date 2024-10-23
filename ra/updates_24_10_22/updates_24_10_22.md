@@ -48,7 +48,7 @@ To address these issues, I implemented several modifications to the model archit
 
 3. **BLIP2 Removal**: BLIP2 was removed entirely. Since W+ latent mappings are sufficient to guide the diffusion process, especially in later stages where low-level attributes like faces are defined, text descriptions from BLIP2 were redundant for this task. This aligns with findings from [this paper](https://arxiv.org/pdf/2305.16225).
 
-The updated method works well, but there are still consistency issues that I plan to address using a text-to-video model.
+The updated method works well, but there are still artifacts generated in areas outside the face. There are also consistency issues that I plan to address using a text-to-video model
 
 ---
 
@@ -79,5 +79,6 @@ As you can see, it works very well. We can confirm that editing facial expressio
 
 **Next Steps:**
 - Explore the use of textual inversion as an alternative to partial denoising.
-- Investigate how to extend this method to real-world video editing.
 - Isolate modifications only to facial areas in the image or video.
+- Investigate how to extend this method to real-world video editing.
+- Try out other text-to-video diffusion models.
