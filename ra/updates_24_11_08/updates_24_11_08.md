@@ -30,7 +30,7 @@ To address these limitations, I integrated the Residual Cross-Attention module f
 This method also work even without any e4e latent from GAN inversion, making it possible to directly edit the generation of a video. In the traditional W+ Adapter approach, the feature representation is defined as:
 
 ```
-fz = z + αn
+fw = w + αn
 ```
 where:
 - `z` represents the identity latent code
