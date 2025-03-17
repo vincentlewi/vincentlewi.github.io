@@ -25,7 +25,12 @@ const router = createHashRouter([
   {
     path: "/ra/updates_24_11_08",
     element: <MarkdownComponent filePath='/ra/updates_24_11_08/updates_24_11_08.md'/>
+  },
+  {
+    path: "/ra/updates_25_03_17",
+    element: <MarkdownComponent filePath='/ra/updates_25_03_17/updates_25_03_17.md'/>
   }
+
 ]);
 
 root.render(
