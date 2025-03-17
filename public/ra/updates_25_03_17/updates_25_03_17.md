@@ -7,7 +7,7 @@ In this update, I am exploring non-binary edit direction discovery in H-space wi
 
 In this update, I will cover two methods, a naive and a VAE-based approach.
 
-## Preleminaries: The H-Space
+## Preliminaries: The H-Space
 The H-space is defined as the set of bottleneck activations `ht` across the T timesteps in the synthesis process. Specifically, these activations come from the deepest bottleneck layer of the U-Net. For context, consider the pretrained DDPM model (released by Google) which operates on input images of size `[3, 256, 256]` and produces a deepest feature map of size `[512, 8, 8]`. Consequently, an element in H-space, denoted as `hT:1`, has dimensions `[T, 512, 8, 8]`.
 
 ![h_space](/ra/updates_25_03_17/h_space.png)
