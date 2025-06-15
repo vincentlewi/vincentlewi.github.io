@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from 'remark-gfm'
+import RANavbar from './RANavbar'
 // import "./App.css"; // Make sure your custom CSS is imported
 
 const MarkdownComponent = ({ filePath }) => {
@@ -16,9 +17,12 @@ const MarkdownComponent = ({ filePath }) => {
   }, [filePath]);
 
   return (
+    <>
+    <RANavbar currentPath={window.location.hash.substring(1)} />
     <div className="medium-markdown">
       <Markdown remarkPlugins={[remarkGfm]}>{markdownContent}</Markdown>
     </div>
+    </>
   );
 };
 
