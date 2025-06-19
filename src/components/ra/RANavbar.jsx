@@ -1,8 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
 import { raRoutes } from './raConfig'; // Adjust as needed
 
-const RANavbar = ({ currentPath = '' }) => {
+const RANavbar = () => {
+  const [currentPath, setCurrentPath] = useState('');
+
+  // Get the current path from the hash and update on hash change
+  useEffect(() => {
+    const getHashPath = () => {
+      const hash = window.location.hash; // e.g. "#/ra/updates_25_03_17"
+      const path = hash.startsWith('#') ? hash.slice(1) : hash;
+      setCurrentPath(path);
+    };
+
+    getHashPath(); // on mount
+    window.addEventListener('hashchange', getHashPath); // listen to hash changes
+
+    return () => {
+      window.removeEventListener('hashchange', getHashPath); // cleanup
+    };
+  }, []);
+
   if (!currentPath.startsWith('/ra')) {
     return null;
   }
