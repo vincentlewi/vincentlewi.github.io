@@ -14,6 +14,16 @@ export const raRoutes = [
     path: '/ra/updates_25_03_17',
     label: 'Updates 25-03-17',
     filePath: '/ra/updates_25_03_17/updates_25_03_17.md'
+  },
+  {
+    path: '/ra/updates_25_03_24',
+    label: 'Updates 25-03-24',
+    filePath: '/ra/updates_25_03_24/updates_25_03_24.md'
+  },
+  {
+    path: '/ra/updates_25_04_28',
+    label: 'Updates 25-05-28',
+    filePath: '/ra/updates_25_04_28/updates_25_04_28'
   }
 ];
 
